@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "get gist for Atom",
   "activationEvents": ["gistom:toggle"],
-  "repository": "https://github.com/atom/gistom",
+  "repository": "https://github.com/johna1203/gistom.git",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
