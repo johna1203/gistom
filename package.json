@@ -1,0 +1,15 @@
+{
+  "name": "gistom",
+  "main": "./lib/gistom",
+  "version": "0.0.1",
+  "description": "get gist for Atom",
+  "activationEvents": ["gistom:toggle"],
+  "repository": "https://github.com/atom/gistom",
+  "license": "MIT",
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "dependencies": {
+    "github" : "*"
+  }
+}

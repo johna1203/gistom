@@ -1,0 +1,16 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Enable gistom': 'gistom:toggle'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'gistom'
+      'submenu': [
+        { 'label': 'Toggle', 'command': 'gistom:toggle' }
+      ]
+    ]
+  }
+]
