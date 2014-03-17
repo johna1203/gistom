@@ -2,4 +2,4 @@
 
 Get gist for Atom.
 
-![Get gist](https://github.com/johna1203/gistom/blob/master/gistom.gif)
+![Get gist](https://raw.github.com/johna1203/gistom/master/gistom.gif)
