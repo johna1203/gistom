@@ -1,7 +1,10 @@
 GistomView = require './gistom-view'
 
 module.exports =
-  gistomView: null
+  gistomView: null,
+  configDefaults:
+    token : ""
+    user : ""
 
   activate: (state) ->
     @gistomView = new GistomView(state.gistomViewState)
