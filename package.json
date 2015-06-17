@@ -1,7 +1,7 @@
 {
   "name": "gistom",
   "main": "./lib/gistom",
-  "version": "0.4.8",
+  "version": "0.5.0",
   "description": "get gist for Atom",
   "activationEvents": [
     "gistom:toggle"
