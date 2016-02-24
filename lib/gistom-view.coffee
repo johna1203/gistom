@@ -1,4 +1,4 @@
-{$, $$, SelectListView} = require 'atom'
+{$, $$, SelectListView} = require 'atom-space-pen-views'
 
 GitHubApi = require 'github'
 
@@ -9,12 +9,15 @@ class GistomView extends SelectListView
   initialize: (@pane) ->
     super
     @addClass('overlay from-top')
-    atom.workspaceView.command "gistom:toggle", => @toggle()
+    atom.commands.add 'atom-workspace', "gistom:toggle", => @toggle()
 
     @github = new GitHubApi(
-        version: "3.0.0"
-        debug: true
-    );
+      version: "3.0.0"
+      debug: true
+    )
+
+  cancelled: ->
+    @hide()
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
@@ -40,10 +43,9 @@ class GistomView extends SelectListView
     if !_token || !_user
       return
 
-
     @github.authenticate(
-        type: "oauth"
-        token: _token
+      type: "oauth"
+      token: _token
     )
 
     self = @
@@ -53,14 +55,20 @@ class GistomView extends SelectListView
       self.setItems data
     )
 
-    if @hasParent()
-      @detach()
+    if @panel?.isVisible()
+      @cancel()
     else
-      @attach()
+      @show()
 
-  attach: ->
-    atom.workspaceView.append(this)
+  hide: ->
+    @panel?.hide()
+
+  show: ->
+    @panel ?= atom.workspace.addModalPanel(item: this)
+    @panel.show()
+
     @focusFilterEditor()
+
 
   viewForItem: (item) ->
     item.files.length
@@ -68,8 +76,8 @@ class GistomView extends SelectListView
 
   confirmed: (item) ->
     @cancel()
-    atom.workspaceView.getActiveView().trigger('application:new-file')
+    atom.commands.dispatch atom.workspace.getActiveTextEditor(), 'application:new-file'
 
     for k,v of item.files
       $.get v.raw_url, (data) ->
-        atom.workspaceView.getActiveView().insertText(data)
+        atom.workspace.open().then (editor) -> editor.insertText(data)
